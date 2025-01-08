@@ -1,6 +1,6 @@
 import React from "react";
 import { useParams, Link } from "react-router-dom";
-import { FiUsers, FiTag, FiBriefcase, FiArrowLeft } from "react-icons/fi";
+import { FiUsers, FiTag, FiBriefcase } from "react-icons/fi";
 
 const MatchDetails: React.FC = () => {
   const { id } = useParams();
@@ -41,18 +41,9 @@ const MatchDetails: React.FC = () => {
           <p className="mt-2 text-lg font-light">{match.description}</p>
         </div>
       </header>
-      {/* Back Button */}
-      <div className="max-w-10xl mx-auto px-6 py-4">
-        <Link
-          to="/creators/dashboard/matches"
-          className="bg-transparent border border-blue-500 text-blue-500 px-6 py-2 rounded-lg font-semibold hover:bg-blue-500 hover:text-white shadow-md transition duration-200"
-        >
-          <span>Back to Matches</span>
-        </Link>
-      </div>
 
       {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10 grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <main className="max-w-20xl mx-auto px-6 sm:px-8 lg:px-10 grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Main Details */}
         <div className="lg:col-span-2 space-y-12">
           {/* Match Overview */}
@@ -133,64 +124,22 @@ const MatchDetails: React.FC = () => {
             </div>
           </section>
         </div>
-
-        {/* Application Form */}
-        <aside className="bg-white shadow-lg rounded-lg p-6">
-          <h2 className="text-xl font-bold text-gray-800 mb-4">Apply Now</h2>
-          <form className="space-y-4">
-            <div>
-              <label
-                htmlFor="name"
-                className="block text-sm font-medium text-gray-600"
-              >
-                Full Name
-              </label>
-              <input
-                type="text"
-                id="name"
-                placeholder="Your Name"
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                required
-              />
-            </div>
-            <div>
-              <label
-                htmlFor="email"
-                className="block text-sm font-medium text-gray-600"
-              >
-                Email
-              </label>
-              <input
-                type="email"
-                id="email"
-                placeholder="Your Email"
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                required
-              />
-            </div>
-            <div>
-              <label
-                htmlFor="message"
-                className="block text-sm font-medium text-gray-600"
-              >
-                Message
-              </label>
-              <textarea
-                id="message"
-                rows={4}
-                placeholder="Your Message"
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              ></textarea>
-            </div>
-            <button
-              type="submit"
-              className="bg-blue-500 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-600 transition duration-200"
-            >
-              Submit Application
-            </button>
-          </form>
-        </aside>
       </main>
+      {/* Buttons section */}
+      <div className="max-w-10xl flex gap-6 mx-auto px-10 py-16 my:4">
+        <button
+          type="submit"
+          className="bg-blue-500 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-600 transition duration-200"
+        >
+          Connect Now
+        </button>
+        <Link
+          to="/creators/dashboard/matches"
+          className="bg-transparent border border-blue-500 text-blue-500 px-6 py-2 rounded-lg font-semibold hover:bg-blue-500 hover:text-white shadow-md transition duration-200"
+        >
+          <span>Back to Matches</span>
+        </Link>
+      </div>
     </div>
   );
 };

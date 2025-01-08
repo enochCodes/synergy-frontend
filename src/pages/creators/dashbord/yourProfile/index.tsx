@@ -26,7 +26,7 @@ const ProfileOverview: React.FC = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-gray-50">
       {/* Header */}
-      <header className="bg-white shadow-md sticky top-0 z-10">
+      <header className="bg-white shadow-md top-0 z-10">
         <div className="flex flex-col md:flex-row items-center justify-between p-6">
           <div className="mb-4 md:mb-0">
             <h1 className="text-3xl font-bold text-gray-900 leading-tight">
@@ -67,7 +67,7 @@ const ProfileOverview: React.FC = () => {
       </header>
 
       {/* Main Content */}
-      <main>{renderContent()}</main>
+      <main className="py-4 mt-2 border-0">{renderContent()}</main>
     </div>
   );
 };

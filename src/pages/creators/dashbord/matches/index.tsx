@@ -40,7 +40,7 @@ const Matches: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-gray-50 px-6 py-4">
+    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-gray-50 px-1 py-1">
       {/* Header */}
       <header className="bg-gradient-to-r from-blue-600 to-blue-400 text-white rounded-lg shadow-lg p-6 mb-6">
         <div className="max-w-10xl mx-auto">

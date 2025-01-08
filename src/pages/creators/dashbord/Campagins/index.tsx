@@ -38,7 +38,7 @@ const CampaignTracker: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 px-4 py-6">
+    <div className="min-h-screen bg-gray-50 px-1 py-2">
       {/* Header */}
       <header className="bg-gradient-to-r from-blue-500 to-indigo-500 text-white rounded-lg shadow p-6 mb-8 text-center sm:text-left">
         <h1 className="text-2xl font-extrabold mb-2">Campaign Tracker</h1>
