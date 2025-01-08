@@ -27,37 +27,39 @@ const CampaignTracker: React.FC = () => {
   const getStatusStyle = (status: string) => {
     switch (status) {
       case "Active":
-        return "text-green-500 bg-green-50";
+        return "bg-green-500 text-white px-2 py-1 rounded-full";
       case "Completed":
-        return "text-gray-500 bg-gray-100";
+        return "bg-gray-200 text-gray-600 px-2 py-1 rounded-full";
       case "Pending":
-        return "text-yellow-500 bg-yellow-50";
+        return "bg-yellow-500 text-white px-2 py-1 rounded-full";
       default:
         return "text-gray-500 bg-gray-100";
     }
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 px-1 py-2">
+    <div className="min-h-screen bg-gray-100 px-4 py-8">
       {/* Header */}
-      <header className="bg-gradient-to-r from-blue-500 to-indigo-500 text-white rounded-lg shadow p-6 mb-8 text-center sm:text-left">
-        <h1 className="text-2xl font-extrabold mb-2">Campaign Tracker</h1>
-        <p className="text-lg">
-          Stay informed about your campaigns' progress and manage them
-          efficiently.
-        </p>
+      <header className="bg-gradient-to-r from-blue-500 to-indigo-500 text-white rounded-lg shadow p-6 mb-8 flex justify-between items-center">
+        <h1 className="text-2xl font-extrabold">Campaign Tracker</h1>
+        <Link
+          to="/create-campaign"
+          className="text-white hover:underline font-semibold"
+        >
+          Create Campaign
+        </Link>
       </header>
 
       {/* Campaign List */}
-      <div className="bg-white shadow-lg rounded-lg p-6">
+      <div className="bg-white rounded-lg shadow p-6">
         <h2 className="text-3xl font-bold text-gray-800 mb-6">
           Your Campaigns
         </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {campaigns.map((campaign) => (
             <div
               key={campaign.id}
-              className="border border-gray-200 rounded-lg p-6 shadow-sm hover:shadow-lg transition-shadow bg-gray-50 flex flex-col justify-between"
+              className="bg-white border border-gray-200 rounded-lg p-6 shadow hover:shadow-lg transition-shadow flex flex-col justify-between"
             >
               {/* Campaign Details */}
               <div>
@@ -69,17 +71,15 @@ const CampaignTracker: React.FC = () => {
                 </p>
               </div>
               {/* Status and Actions */}
-              <div className="mt-4 flex items-center justify-between">
+              <div className="mt-4 flex flex-1 items-center justify-between">
                 <span
-                  className={`inline-flex items-center px-3 py-1 text-sm font-medium rounded-full ${getStatusStyle(
-                    campaign.status,
-                  )}`}
+                  className={`inline-flex items-center px-3 py-1 text-sm font-medium rounded-full ${getStatusStyle(campaign.status)}`}
                 >
                   {campaign.status === "Active" && (
-                    <FiCircle className="mr-2 text-green-500" />
+                    <FiCircle className="mr-2 text-white" />
                   )}
                   {campaign.status === "Completed" && (
-                    <FiCheckCircle className="mr-2 text-gray-500" />
+                    <FiCheckCircle className="mr-2 text-gray-600" />
                   )}
                   {campaign.status}
                 </span>
