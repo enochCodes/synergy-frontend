@@ -32,7 +32,7 @@ const NicheExpertise: React.FC = () => {
   };
 
   return (
-    <div className="bg-white rounded-xl shadow-lg p-8">
+    <div className="bg-white rounded-xl shadow-lg p-6 md:p-8">
       {/* Header */}
       <header className="mb-6">
         <h1 className="text-2xl font-extrabold text-gray-900">
@@ -92,7 +92,7 @@ const NicheExpertise: React.FC = () => {
         {/* Submit Button */}
         <button
           type="submit"
-          className="bg-blue-500 text-white px-6 py-3 rounded-md font-medium hover:bg-blue-600 transition duration-200"
+          className="w-full md:w-auto bg-blue-500 text-white px-6 py-3 rounded-md font-medium hover:bg-blue-600 transition duration-200"
           disabled={selectedNiches.length === 0}
         >
           Save Niche Expertise

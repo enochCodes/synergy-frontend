@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
+import { signup } from "../../services/auth.service";
 import { useNavigate, Link } from "react-router-dom";
 import SynergyLogo from "../../assets/Synergy.svg";
 import GoogleIcon from "../../assets/google.svg";
+import { getUserFromToken } from "../../hooks/auth.hooks";
 
 const Signup: React.FC = () => {
   const navigate = useNavigate();
@@ -11,10 +13,21 @@ const Signup: React.FC = () => {
     lastName: "",
     email: "",
     password: "",
+    role: "",
   });
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    const token = localStorage.getItem("authToken");
+    if (token) {
+      const user = getUserFromToken();
+      if (user?.role == "CREATOR") {
+        navigate("/creators/dashboard");
+      }
+      if (user?.role == "BUSINESS") {
+        navigate("/business/dashboard");
+      }
+    }
     const role = sessionStorage.getItem("selectedRole");
     if (!role) {
       navigate("/getstarted");
@@ -38,24 +51,22 @@ const Signup: React.FC = () => {
 
     try {
       const role = isCreator ? "CREATOR" : "BUSINESS";
-      // Simulate an API call
-      const signup = async (data: any) => {
-        data;
-      };
-      const responseData = await signup({ ...formData, role });
+      const response = await signup(role, formData);
 
-      // Save token to session or local storage
-      sessionStorage.setItem("token", responseData.token);
+      console.log("Signup Response:", response);
 
-      // Navigate to appropriate page based on role
-      if (role === "CREATOR") {
-        navigate("/creators/dashboard/onboarding");
+      if (response.success) {
+        localStorage.setItem("authToken", response.token);
+        if (role === "CREATOR") {
+          navigate("/creators/dashboard/onboarding");
+        } else {
+          navigate("/bussiness/dashboard");
+        }
       } else {
-        navigate("/bussiness/dashboard");
+        console.error("Signup failed:", response.message);
       }
-    } catch (error) {
-      console.error(error);
-      alert("An error occurred. Please try again later.");
+    } catch (error: any) {
+      console.error("Error during signup:", error.message || error);
     } finally {
       setLoading(false);
     }

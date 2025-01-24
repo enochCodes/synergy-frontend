@@ -1,6 +1,9 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom"; // Import useNavigate
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import { getUserFromToken } from "../../hooks/auth.hooks";
+import { CreatorProfile } from "../../types/types";
+import { setCreatorProfile } from "../../services/creators.service";
 
 const niches = [
   "Fashion",
@@ -18,45 +21,68 @@ const niches = [
 ];
 
 const CreatorsOnboarding: React.FC = () => {
-  const navigate = useNavigate(); // Initialize navigate
+  const navigate = useNavigate();
   const [socialLinks, setSocialLinks] = useState({
     tiktok: "",
     instagram: "",
-    youtube: "",
+    facebook: "",
   });
   const [bio, setBio] = useState("");
   const [selectedNiches, setSelectedNiches] = useState<string[]>([]);
 
+  // Handle social link input changes
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setSocialLinks((prev) => ({ ...prev, [name]: value }));
   };
 
+  // Toggle niche selection
   const toggleNiche = (niche: string) => {
-    if (selectedNiches.includes(niche)) {
-      setSelectedNiches((prev) => prev.filter((item) => item !== niche));
-    } else if (selectedNiches.length < 3) {
-      setSelectedNiches((prev) => [...prev, niche]);
-    }
+    setSelectedNiches((prev) => {
+      if (prev.includes(niche)) return prev.filter((item) => item !== niche);
+      if (prev.length < 3) return [...prev, niche];
+      return prev; // No update if max niches selected
+    });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  // Redirect users based on token and role
+  useEffect(() => {
+    const token = localStorage.getItem("authToken");
+    if (token && !sessionStorage.getItem("selectedRole")) {
+      const user = getUserFromToken();
+      if (user?.role === "CREATOR") navigate("/creators/dashboard");
+      if (user?.role === "BUSINESS") navigate("/business/dashboard");
+    }
+  }, [navigate]);
+
+  // Handle form submission
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    // Simulating an API call
-    setTimeout(() => {
-      console.log("Submitted Bio:", bio);
-      console.log("Submitted Social Links:", socialLinks);
-      console.log("Selected Niches:", selectedNiches);
-
-      // Navigate to the dashboard
-      navigate("/creators/dashboard");
-    }, 500); // Simulated delay for the "API call"
+    const formData: CreatorProfile = {
+      niches: selectedNiches,
+      socialLinks,
+      bio,
+    };
+    try {
+      const response = await setCreatorProfile(formData);
+      if (response.success) {
+        const sessionRole = sessionStorage.getItem("selectedRole");
+        if (sessionRole === "CREATOR") {
+          navigate("/creators/dashboard");
+          sessionStorage.clear();
+        } else if (sessionRole === "BUSINESS") {
+          navigate("/business/dashboard");
+          sessionStorage.clear();
+        }
+      }
+    } catch (err: any) {
+      console.error(err);
+    }
   };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-500 to-indigo-600 flex flex-col items-center py-12 px-4">
-      {/* Container */}
+      {/* Main Container */}
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
@@ -93,6 +119,9 @@ const CreatorsOnboarding: React.FC = () => {
                       : "bg-gray-100 text-gray-700 hover:bg-gray-200"
                 }`}
                 onClick={() => toggleNiche(niche)}
+                aria-disabled={
+                  selectedNiches.length >= 3 && !selectedNiches.includes(niche)
+                }
               >
                 {niche}
               </motion.div>
@@ -136,9 +165,9 @@ const CreatorsOnboarding: React.FC = () => {
               <input
                 type="url"
                 name="youtube"
-                value={socialLinks.youtube}
+                value={socialLinks.facebook}
                 onChange={handleInputChange}
-                placeholder="YouTube Channel Link"
+                placeholder="YouTube facebook Link"
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
@@ -156,7 +185,7 @@ const CreatorsOnboarding: React.FC = () => {
             <textarea
               value={bio}
               onChange={(e) => setBio(e.target.value)}
-              placeholder="Share a brief description about you..."
+              placeholder="Share a brief description about yourself..."
               className="w-full px-4 py-3 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
               rows={4}
             />

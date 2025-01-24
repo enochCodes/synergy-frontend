@@ -30,7 +30,7 @@ const Portfolio: React.FC = () => {
   };
 
   return (
-    <div className="bg-white rounded-2xl shadow-lg p-8">
+    <div className="bg-white rounded-2xl shadow-lg p-6 md:p-8">
       {/* Header */}
       <header className="mb-6">
         <h1 className="text-2xl font-extrabold text-gray-900">Portfolio</h1>
@@ -57,7 +57,7 @@ const Portfolio: React.FC = () => {
         </div>
         <button
           type="submit"
-          className="bg-blue-500 text-white px-4 py-2 rounded-lg font-medium hover:bg-blue-600 transition duration-200"
+          className="w-full md:w-auto bg-blue-500 text-white px-4 py-2 rounded-lg font-medium hover:bg-blue-600 transition duration-200"
         >
           Add Portfolio
         </button>
@@ -73,19 +73,19 @@ const Portfolio: React.FC = () => {
             {portfolioLinks.map((portfolioLink, index) => (
               <li
                 key={index}
-                className="flex justify-between items-center bg-gray-50 border border-gray-200 rounded-lg p-4"
+                className="flex flex-col md:flex-row justify-between items-center bg-gray-50 border border-gray-200 rounded-lg p-4"
               >
                 <a
                   href={portfolioLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-blue-500 hover:underline"
+                  className="text-blue-500 hover:underline break-all"
                 >
                   {portfolioLink}
                 </a>
                 <button
                   onClick={() => removeLink(index)}
-                  className="text-red-500 hover:underline font-medium"
+                  className="text-red-500 hover:underline font-medium mt-2 md:mt-0"
                 >
                   Remove
                 </button>

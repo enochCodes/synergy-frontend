@@ -27,21 +27,23 @@ const CampaignTracker: React.FC = () => {
   const getStatusStyle = (status: string) => {
     switch (status) {
       case "Active":
-        return "bg-green-500 text-white px-2 py-1 rounded-full";
+        return "bg-green-500 text-white";
       case "Completed":
-        return "bg-gray-200 text-gray-600 px-2 py-1 rounded-full";
+        return "bg-gray-200 text-gray-600";
       case "Pending":
-        return "bg-yellow-500 text-white px-2 py-1 rounded-full";
+        return "bg-yellow-500 text-white";
       default:
         return "text-gray-500 bg-gray-100";
     }
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 px-4 py-8">
+    <div className="min-h-screen bg-gray-100 px-2 py-6">
       {/* Header */}
-      <header className="bg-gradient-to-r from-blue-500 to-indigo-500 text-white rounded-lg shadow p-6 mb-8 flex justify-between items-center">
-        <h1 className="text-2xl font-extrabold">Campaign Tracker</h1>
+      <header className="bg-gradient-to-r from-blue-500 to-indigo-500 text-white rounded-lg shadow p-6 mb-8 flex flex-col md:flex-row justify-between items-center">
+        <h1 className="text-2xl font-extrabold mb-4 md:mb-0">
+          Campaign Tracker
+        </h1>
         <Link
           to="/create-campaign"
           className="text-white hover:underline font-semibold"
@@ -55,7 +57,7 @@ const CampaignTracker: React.FC = () => {
         <h2 className="text-3xl font-bold text-gray-800 mb-6">
           Your Campaigns
         </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {campaigns.map((campaign) => (
             <div
               key={campaign.id}
@@ -71,7 +73,7 @@ const CampaignTracker: React.FC = () => {
                 </p>
               </div>
               {/* Status and Actions */}
-              <div className="mt-4 flex flex-1 items-center justify-between">
+              <div className="mt-4 flex flex-col sm:flex-row sm:items-center justify-between">
                 <span
                   className={`inline-flex items-center px-3 py-1 text-sm font-medium rounded-full ${getStatusStyle(campaign.status)}`}
                 >
@@ -85,7 +87,7 @@ const CampaignTracker: React.FC = () => {
                 </span>
                 <Link
                   to={`/creators/dashboard/campaigns/${campaign.id}`}
-                  className="text-blue-500 flex items-center font-medium hover:underline"
+                  className="text-blue-500 flex items-center font-medium hover:underline mt-2 sm:mt-0"
                 >
                   View Details <FiArrowRight className="ml-1" />
                 </Link>

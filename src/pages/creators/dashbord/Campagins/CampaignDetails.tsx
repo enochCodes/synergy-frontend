@@ -140,6 +140,7 @@ const CampaignDetails: React.FC = () => {
         },
         ticks: {
           color: "#4B5563",
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           callback: function (value: any) {
             return value >= 1000 ? value / 1000 + "k" : value;
           },
@@ -150,18 +151,18 @@ const CampaignDetails: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gray-100">
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-4 py-6">
         {/* Header */}
-        <div className="flex justify-between items-center mb-8">
-          <div>
-            <h1 className="text-3xl font-bold text-gray-800">
+        <div className="flex flex-col md:flex-row justify-between items-center mb-8">
+          <div className="mb-4 md:mb-0">
+            <h1 className="text-2xl md:text-3xl font-bold text-gray-800">
               {campaign.title}
             </h1>
             <p className="text-gray-600">{campaign.description}</p>
           </div>
           <button
             onClick={() => window.history.back()}
-            className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg flex items-center"
+            className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg flex items-center transition duration-200"
           >
             <FiArrowLeft className="mr-2" />
             Back
@@ -171,26 +172,26 @@ const CampaignDetails: React.FC = () => {
         {/* Content */}
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
           {/* Quick Stats Section */}
-          <div className="col-span-1 bg-white rounded-lg shadow-md p-6">
+          <div className="col-span-1 bg-white/95 backdrop-blur-lg rounded-lg shadow-xl p-6">
             <h2 className="text-xl font-bold text-gray-800 mb-4">
               Quick Stats
             </h2>
             <div className="grid grid-cols-1 gap-4">
-              <div className="bg-blue-50 p-4 rounded-lg shadow-sm flex items-center">
+              <div className="bg-blue-50/50 p-4 rounded-lg shadow-sm flex items-center hover:shadow-md transition duration-200">
                 <FiBarChart2 className="text-blue-600 text-3xl mr-4" />
                 <div>
                   <p className="text-sm text-gray-600">Total Impressions</p>
                   <p className="text-lg font-semibold text-blue-600">1.2M</p>
                 </div>
               </div>
-              <div className="bg-yellow-50 p-4 rounded-lg shadow-sm flex items-center">
+              <div className="bg-yellow-50/50 p-4 rounded-lg shadow-sm flex items-center hover:shadow-md transition duration-200">
                 <FiBarChart2 className="text-yellow-600 text-3xl mr-4" />
                 <div>
                   <p className="text-sm text-gray-600">Total Engagements</p>
                   <p className="text-lg font-semibold text-yellow-600">350K</p>
                 </div>
               </div>
-              <div className="bg-purple-50 p-4 rounded-lg shadow-sm flex items-center">
+              <div className="bg-purple-50/50 p-4 rounded-lg shadow-sm flex items-center hover:shadow-md transition duration-200">
                 <FiBarChart2 className="text-purple-600 text-3xl mr-4" />
                 <div>
                   <p className="text-sm text-gray-600">Total Conversions</p>
@@ -202,15 +203,15 @@ const CampaignDetails: React.FC = () => {
 
           {/* Stats by Platform Section */}
           <div className="col-span-1 lg:col-span-3">
-            <div className="bg-white rounded-lg shadow-md p-6">
-              <h2 className="text-xl font-bold text-gray-800 mb-4">
+            <div className="bg-white/95 backdrop-blur-lg rounded-lg shadow-xl p-6">
+              <h2 className="text-xl font-bold text-gray-800 mb-6">
                 Stats by Platform
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {campaign.platforms.map((platform) => (
                   <div
                     key={platform.name}
-                    className="p-4 bg-gray-50 rounded-lg shadow-md hover:shadow-lg flex flex-col items-center text-center transition"
+                    className="p-4 bg-gray-50/50 rounded-lg shadow-md hover:shadow-lg flex flex-col items-center text-center transition duration-200"
                   >
                     <h3 className="text-lg font-semibold text-gray-800 mb-4">
                       {platform.name}
@@ -252,8 +253,8 @@ const CampaignDetails: React.FC = () => {
         </div>
 
         {/* Performance Metrics Graph */}
-        <div className="bg-white rounded-lg shadow-md p-6 mt-8">
-          <div className="flex justify-between items-center mb-6">
+        <div className="bg-white/95 backdrop-blur-lg rounded-lg shadow-xl p-6 mt-8">
+          <div className="flex flex-col md:flex-row justify-between items-center mb-6">
             <h2 className="text-2xl font-bold text-gray-800">
               Performance Metrics Over Time
             </h2>

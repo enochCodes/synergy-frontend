@@ -1,5 +1,5 @@
 import React from "react";
-import { useParams, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import {
   FiUsers,
   FiTag,
@@ -10,8 +10,6 @@ import {
 } from "react-icons/fi";
 
 const MatchDetails: React.FC = () => {
-  const { id } = useParams();
-
   const match = {
     id: 1,
     name: "Brand A",
@@ -40,7 +38,7 @@ const MatchDetails: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-50 via-gray-100 to-gray-200">
+    <div className="min-h-screen bg-gradient-to-b from-blue-50 via-gray-100 to-gray-200 pb-24">
       {/* Brand Thumbnail */}
       <div className="relative w-full h-60 bg-gray-200 rounded-b-lg overflow-hidden mb-8 shadow-lg">
         {/* Thumbnail Image */}
@@ -57,7 +55,7 @@ const MatchDetails: React.FC = () => {
       </div>
 
       {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10 grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Left Section */}
         <div className="lg:col-span-2 space-y-12">
           {/* Match Overview */}
@@ -163,11 +161,11 @@ const MatchDetails: React.FC = () => {
             </p>
           </div>
           {/* Buttons */}
-          <div className="max-w-4xl mx-auto flex gap-4 justify-start mt-8 px-6">
+          <div className="flex flex-col sm:flex-row gap-4">
             {/* Connect Now Button */}
             <button
               type="button"
-              className="bg-blue-500 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-600 transition duration-200 shadow-md"
+              className="w-full sm:w-auto bg-blue-500 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-600 transition duration-200 shadow-md"
             >
               Connect Now
             </button>
@@ -175,7 +173,7 @@ const MatchDetails: React.FC = () => {
             {/* Back Button */}
             <button
               onClick={() => window.history.back()}
-              className="bg-gray-100 border border-blue-500 text-blue-500 px-6 py-3 rounded-lg font-medium hover:bg-blue-500 hover:text-white shadow-md transition duration-200 flex items-center"
+              className="w-full sm:w-auto bg-gray-100 border border-blue-500 text-blue-500 px-6 py-3 rounded-lg font-medium hover:bg-blue-500 hover:text-white shadow-md transition duration-200 flex items-center justify-center"
             >
               <FiArrowLeft className="mr-2" />
               Back

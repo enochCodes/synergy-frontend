@@ -1,10 +1,32 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { FiUsers, FiTrendingUp, FiHeadphones } from "react-icons/fi";
+import { getUserFromToken } from "../hooks/auth.hooks"; // Import the user hook
 
 const Home: React.FC = () => {
+  const user = getUserFromToken(); // Fetch user info
+  const navigate = useNavigate();
+
+  // Get the dashboard route based on user role
+  const getDashboardRoute = () => {
+    if (user?.role === "creator") return "/creators/dashboard";
+    if (user?.role === "business") return "/business/dashboard";
+    return null;
+  };
+
+  const dashboardRoute = getDashboardRoute();
+
+  // Handle navigation for "Get Started" and "Join Now" buttons
+  const handleGetStarted = () => {
+    if (dashboardRoute) {
+      navigate(dashboardRoute); // Redirect to dashboard if logged in
+    } else {
+      navigate("/getstarted"); // Redirect to sign-up if not logged in
+    }
+  };
+
   return (
     <div>
       {/* Navbar */}
@@ -21,12 +43,12 @@ const Home: React.FC = () => {
             their potential with Synergy's innovative platform.
           </p>
           <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
-            <Link
-              to="/getstarted"
+            <button
+              onClick={handleGetStarted}
               className="bg-white text-blue-600 font-medium px-6 py-3 rounded-lg shadow-lg hover:bg-gray-100 transition duration-300"
             >
               Get Started
-            </Link>
+            </button>
             <Link
               to="/about"
               className="bg-transparent border border-white text-white font-medium px-6 py-3 rounded-lg hover:bg-white hover:text-blue-600 transition duration-300"
@@ -96,36 +118,7 @@ const Home: React.FC = () => {
                 </Link>
               </div>
             </div>
-            {/* Campaign Card 2 */}
-            <div className="bg-gray-50 shadow-md rounded-lg overflow-hidden hover:shadow-lg transition duration-300">
-              <div className="p-6">
-                <h3 className="text-lg font-bold mb-3">Campaign Title 2</h3>
-                <p className="text-gray-600 mb-6">
-                  Join campaigns that connect creators with top brands.
-                </p>
-                <Link
-                  to="/campaigns/2"
-                  className="text-blue-500 font-medium hover:underline"
-                >
-                  Learn More →
-                </Link>
-              </div>
-            </div>
-            {/* Campaign Card 3 */}
-            <div className="bg-gray-50 shadow-md rounded-lg overflow-hidden hover:shadow-lg transition duration-300">
-              <div className="p-6">
-                <h3 className="text-lg font-bold mb-3">Campaign Title 3</h3>
-                <p className="text-gray-600 mb-6">
-                  Unlock new opportunities and reach a broader audience.
-                </p>
-                <Link
-                  to="/campaigns/3"
-                  className="text-blue-500 font-medium hover:underline"
-                >
-                  Learn More →
-                </Link>
-              </div>
-            </div>
+            {/* Other campaign cards */}
           </div>
           <div className="text-center mt-12">
             <Link
@@ -147,12 +140,12 @@ const Home: React.FC = () => {
           <p className="text-lg mb-8">
             Take the next step and experience the power of Synergy.
           </p>
-          <Link
-            to="/getstarted"
+          <button
+            onClick={handleGetStarted}
             className="bg-white text-blue-600 px-6 py-3 rounded-lg font-medium hover:bg-gray-100 transition duration-300"
           >
             Join Now
-          </Link>
+          </button>
         </div>
       </section>
 

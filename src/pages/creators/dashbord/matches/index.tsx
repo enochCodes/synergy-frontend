@@ -41,11 +41,13 @@ const Matches: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-gray-50 px-4 py-8">
+    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-gray-50 px-2 py-4">
       {/* Header */}
-      <header className="bg-gradient-to-r from-blue-600 to-blue-400 text-white rounded-lg shadow-lg p-6 mb-8 flex justify-between items-center">
-        <h1 className="text-2xl font-extrabold">Perfect Matches</h1>
-        <p className="text-lg font-light text-right">
+      <header className="bg-gradient-to-r from-blue-600 to-blue-400 text-white rounded-lg shadow-lg p-6 mb-8 flex flex-col md:flex-row justify-between items-center">
+        <h1 className="text-2xl font-extrabold mb-4 md:mb-0">
+          Perfect Matches
+        </h1>
+        <p className="text-lg font-light text-center md:text-right">
           Let AI curate the perfect brand partnerships for you.
         </p>
       </header>
@@ -58,7 +60,7 @@ const Matches: React.FC = () => {
         {matches.map((match) => (
           <div
             key={match.id}
-            className="border-b border-gray-200 py-4 hover:bg-gray-100 transition duration-200 flex flex-col md:flex-row items-center justify-between"
+            className="border-b border-gray-200 py-6 px-4 hover:bg-gray-100 transition duration-200 flex flex-col md:flex-row items-center justify-between"
           >
             {/* Match Details */}
             <div className="flex-1">
@@ -90,14 +92,14 @@ const Matches: React.FC = () => {
               </div>
             </div>
             {/* Actions */}
-            <div className="mt-4 md:mt-0 flex items-center space-x-4">
+            <div className="mt-4 md:mt-0 flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-4">
               <Link
                 to={`/creators/dashboard/matches/${match.id}`}
                 className="text-blue-500 flex font-medium hover:underline"
               >
                 View Details <FiChevronRight className="ml-1 mt-1" />
               </Link>
-              <button className="bg-blue-500 text-white px-4 py-2 rounded-lg font-medium hover:bg-blue-600 transition duration-200">
+              <button className="w-full md:w-auto bg-blue-500 text-white px-4 py-2 rounded-lg font-medium hover:bg-blue-600 transition duration-200">
                 Connect Now
               </button>
             </div>

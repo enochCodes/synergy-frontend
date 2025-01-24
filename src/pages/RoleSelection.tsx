@@ -2,6 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import SynergyLogo from "../assets/Synergy.svg";
 import { useEffect } from "react";
+import { getUserFromToken } from "../hooks/auth.hooks";
 
 const RoleSelection: React.FC = () => {
   const navigate = useNavigate();
@@ -11,6 +12,16 @@ const RoleSelection: React.FC = () => {
     navigate("/auth/signup"); // Redirect to signup page
   };
   useEffect(() => {
+    const token = localStorage.getItem("authToken");
+    if (token) {
+      const user = getUserFromToken();
+      if (user?.role === "CREATOR") {
+        navigate("/creators/dashboard");
+      }
+      if (user?.role === "BUSINESS") {
+        navigate("/business/dashboard");
+      }
+    }
     const role = sessionStorage.getItem("selectedRole");
     if (role) {
       navigate("/auth/signup");

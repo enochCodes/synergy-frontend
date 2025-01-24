@@ -10,7 +10,7 @@ import Signup from "./pages/Auth/Signup";
 import "./index.css";
 import RoleSelection from "./pages/RoleSelection";
 import CreatorsOnboarding from "./pages/creators/onbording";
-import DashboardLayout from "./layouts/DashboardLayout";
+import DashboardLayout from "./layouts/CreatorsDashboardLayout";
 import ProfileOverview from "./pages/creators/dashbord/yourProfile";
 import CreatorCampaignTracker from "./pages/creators/dashbord/Campagins/index";
 import CreatorCampaignDetails from "./pages/creators/dashbord/Campagins/CampaignDetails";

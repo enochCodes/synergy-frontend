@@ -2,18 +2,20 @@ import React from "react";
 
 const Overview: React.FC = () => {
   return (
-    <div className="bg-white rounded-lg shadow-lg p-8">
+    <div className="bg-white rounded-lg shadow-lg p-6 md:p-8">
       {/* Header */}
-      <header className="flex items-center justify-between mb-8">
-        <h1 className="text-3xl font-bold text-gray-900">Overview</h1>
+      <header className="mb-8">
+        <h1 className="text-2xl md:text-3xl font-bold text-gray-900">
+          Overview
+        </h1>
       </header>
 
       {/* Profile Picture Upload Section */}
-      <section className="mb-4">
-        <h3 className="text-lg font-semibold text-gray-700 mb-8">
+      <section className="mb-8">
+        <h3 className="text-lg font-semibold text-gray-700 mb-6">
           Profile Picture
         </h3>
-        <div className="flex items-center space-x-6">
+        <div className="flex flex-col md:flex-row items-center md:space-x-6 space-y-6 md:space-y-0">
           {/* Profile Picture Placeholder */}
           <div className="relative w-28 h-28 bg-gray-100 rounded-full flex items-center justify-center shadow-md overflow-hidden">
             <span className="text-gray-400 text-sm">No Image</span>
@@ -22,11 +24,11 @@ const Overview: React.FC = () => {
             </div>
           </div>
           {/* Upload Info */}
-          <div>
+          <div className="text-center md:text-left">
             <button className="bg-blue-500 text-white px-4 py-2 rounded-md font-medium hover:bg-blue-600 transition">
               Upload Photo
             </button>
-            <p className="text-sm text-gray-500 mt-2">
+            <p className="text-sm text-gray-500 mt-2 max-w-xs">
               Drag & drop or click to upload. Use a square image for best
               results.
             </p>
@@ -37,18 +39,12 @@ const Overview: React.FC = () => {
       {/* Username Section */}
       <section className="mb-8">
         <h3 className="text-lg font-semibold text-gray-700 mb-4">Username*</h3>
-        <div className="flex flex-col space-y-2">
-          <div className="relative">
-            <input
-              type="text"
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              value="enochCodes"
-              readOnly
-            />
-            <span className="absolute top-1/2 right-4 -translate-y-1/2 text-gray-500">
-              synergy.app/@enochCodes
-            </span>
-          </div>
+        <div className="relative">
+          <input
+            type="text"
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            placeholder="e.g. enochCodes"
+          />
         </div>
       </section>
 
@@ -59,7 +55,7 @@ const Overview: React.FC = () => {
         </h3>
         <div className="space-y-6">
           {/* TikTok */}
-          <div className="flex items-center space-x-4">
+          <div className="flex flex-col md:flex-row md:items-center space-y-2 md:space-y-0 md:space-x-4">
             <label className="w-28 text-gray-600 font-medium">TikTok:</label>
             <input
               type="url"
@@ -68,12 +64,12 @@ const Overview: React.FC = () => {
             />
           </div>
           {/* Instagram */}
-          <div className="flex items-center space-x-4">
+          <div className="flex flex-col md:flex-row md:items-center space-y-2 md:space-y-0 md:space-x-4">
             <label className="w-28 text-gray-600 font-medium">Instagram:</label>
             <input
               type="url"
               placeholder="e.g. instagram.com/@enochCodes"
-              className=" flex-1 px-4 py-2 border border-gray-300 rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="flex-1 px-4 py-2 border border-gray-300 rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
         </div>
@@ -81,7 +77,7 @@ const Overview: React.FC = () => {
 
       {/* Save Button */}
       <div className="mt-8">
-        <button className="bg-blue-500 text-white px-6 py-3 rounded-md font-medium hover:bg-blue-600 transition duration-200">
+        <button className="w-full md:w-auto bg-blue-500 text-white px-6 py-3 rounded-md font-medium hover:bg-blue-600 transition duration-200">
           Save Changes
         </button>
       </div>
